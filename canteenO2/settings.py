@@ -20,13 +20,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 try:
     from decouple import config
     SECRET_KEY = config('SECRET_KEY', default='django-insecure-!s^)e+d6qnfn(hm@_x09ye-nb7o_m^wz5%$*wh2k&l%ie@(bu*')
-    DEBUG = config('DEBUG', default=True, cast=bool)
+    DEBUG = config('DEBUG', default=False, cast=bool)
     ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
+    # Ensure ngrok domain is present
+    if '9062763978e9.ngrok-free.app' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append('9062763978e9.ngrok-free.app')
+    REMOTE_ACCESS_URL = config('REMOTE_ACCESS_URL', default=None)
 except ImportError:
     # Fallback to environment variables
     SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-!s^)e+d6qnfn(hm@_x09ye-nb7o_m^wz5%$*wh2k&l%ie@(bu*')
-    DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+    DEBUG = os.environ.get('DEBUG', 'False').lower() == 'false'
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    # Ensure ngrok domain is present
+    if '9062763978e9.ngrok-free.app' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append('9062763978e9.ngrok-free.appp')
+    REMOTE_ACCESS_URL = os.environ.get('REMOTE_ACCESS_URL', None)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -151,16 +159,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = '/'
 
 
-'''
-API_KEY = 'test_1d1892f58039d35b1defc81b11e'
-AUTH_TOKEN = 'test_b69b12ddce92055eef455b9a673'
-SALT = 'a669d88b6604426e94ceedf969c0349b''
-
-API_KEY = '240c0058e33423ecd81b81e6ae988f2c'
-AUTH_TOKEN = 'fd8546723bf7f42c5ef59fad792646a6'
-SALT = '1ed25e4b33174137ad48e54cb2f4a737'
-'''
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+
+CSRF_TRUSTED_ORIGINS = ['https://9062763978e9.ngrok-free.app']

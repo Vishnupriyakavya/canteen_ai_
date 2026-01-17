@@ -265,7 +265,7 @@ def update_order_status(request, order_uid):
             logger.info(f"Current order status: {order.status}")
             logger.info(f"POST data: {request.POST}")
             
-            if status in ["pending", "accepted", "completed"]:
+            if status in ["pending", "accepted", "completed","rejected"]:
                 order.status = status
                 order.save()
                 logger.info(f"Order status updated successfully to: {order.status}")

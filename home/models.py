@@ -39,7 +39,7 @@ class Cart(BaseModel):
     is_paid=models.BooleanField(default=False)# means the user has not checked out.
     status = models.CharField(
         max_length=20,
-        choices=[('pending', 'Pending'),('accepted', 'Accepted'),('completed', 'Completed')],
+        choices=[('pending', 'Pending'),('accepted', 'Accepted'),('completed', 'Completed'),('rejected', 'rejected')],
         default='pending'
     )
     payment_method = models.CharField( 

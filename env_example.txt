@@ -1,7 +1,7 @@
 # Django Settings
 SECRET_KEY=your-secret-key-here
 DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+ALLOWED_HOSTS=localhost,127.0.0.1,8088b283280c.ngrok-free.app
 
 # Database (for production, use PostgreSQL)
 DATABASE_URL=sqlite:///db.sqlite3
@@ -26,3 +26,6 @@ CSRF_COOKIE_SECURE=False
 SESSION_COOKIE_SECURE=False
 SECURE_BROWSER_XSS_FILTER=True
 SECURE_CONTENT_TYPE_NOSNIFF=True 
+
+# Remote Access (ngrok or similar)
+REMOTE_ACCESS_URL=https://52299b0605e4.ngrok-free.app 
